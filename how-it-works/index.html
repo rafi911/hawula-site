@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="How Hawula works: start a group, add what you spend, and settle up. Answers to common questions.">
+  <meta name="color-scheme" content="dark">
+  <title>How Hawula works | Hawula</title>
+  <link rel="icon" href="../hawula-icon.png">
+  <style>
+    :root { --navy: #0a1020; --blue: #2563eb; --green: #14b386; --blue-soft: #7fa6ff; --green-soft: #4fd8aa;
+            --soft: #b9c3d6; --line: rgba(255,255,255,0.14); }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; min-height: 100vh; position: relative; overflow-x: hidden; background: var(--navy); color: #fff;
+           font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans Sinhala", "Noto Sans Tamil", sans-serif; line-height: 1.7; }
+    .glow { position: absolute; border-radius: 50%; pointer-events: none; z-index: 0; }
+    .glow.a { width: 420px; height: 420px; top: -140px; left: -120px; background: radial-gradient(closest-side, rgba(37,99,235,0.45), transparent); }
+    .glow.b { width: 440px; height: 440px; top: 380px; right: -160px; background: radial-gradient(closest-side, rgba(20,179,134,0.30), transparent); }
+    .wrap { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; padding: 0 20px; }
+    header.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 18px; padding-bottom: 18px; }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.1rem; color: #fff; text-decoration: none; }
+    .brand svg { width: 28px; height: 28px; }
+    .langs { display: flex; gap: 6px; }
+    .langs button { font: inherit; font-size: 0.9rem; color: var(--soft); background: rgba(255,255,255,0.04); border: 1px solid var(--line);
+                    border-radius: 999px; padding: 5px 14px; cursor: pointer; }
+    .langs button:hover, .langs button:focus-visible { color: #fff; border-color: var(--blue-soft); outline: none; }
+    .langs button[aria-pressed="true"] { color: #0a1020; background: #fff; border-color: #fff; font-weight: 600; }
+    .intro { padding: 36px 0 8px; }
+    h1 { font-size: clamp(1.8rem, 5vw, 2.4rem); font-weight: 800; line-height: 1.3; margin: 0 0 10px; letter-spacing: -0.02em; }
+    .grad { background: linear-gradient(90deg, var(--blue-soft), var(--green-soft)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .lead { color: var(--soft); font-size: 1.08rem; margin: 0; }
+    h2 { font-size: 1.2rem; margin: 40px 0 16px; }
+    ol.steps { list-style: none; counter-reset: s; margin: 0; padding: 0; display: grid; gap: 14px; }
+    ol.steps li { counter-increment: s; display: flex; gap: 16px; border: 1px solid var(--line); background: rgba(255,255,255,0.04);
+                  border-radius: 14px; padding: 18px 20px; }
+    ol.steps li::before { content: counter(s); flex: none; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center;
+                          font-weight: 700; color: #fff; background: linear-gradient(135deg, var(--blue), var(--green)); }
+    ol.steps strong { display: block; font-size: 1.05rem; margin-bottom: 2px; }
+    ol.steps span { color: var(--soft); }
+    details { border: 1px solid var(--line); background: rgba(255,255,255,0.04); border-radius: 14px; margin-bottom: 10px; }
+    summary { cursor: pointer; padding: 14px 20px; font-weight: 600; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; color: var(--blue-soft); font-size: 1.3rem; line-height: 1.2; }
+    details[open] summary::after { content: "\2212"; }
+    summary:focus-visible { outline: 2px solid var(--blue-soft); outline-offset: 2px; border-radius: 14px; }
+    details p { margin: 0; padding: 0 20px 16px; color: var(--soft); }
+    .help a { color: var(--blue-soft); text-underline-offset: 3px; }
+    footer { border-top: 1px solid var(--line); margin-top: 48px; padding: 20px 0 40px; font-size: 0.9rem; color: var(--soft); }
+    footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; }
+    footer a { color: var(--soft); margin-right: 16px; }
+    footer a:hover { color: #fff; }
+    [lang].pane[hidden] { display: none; }
+  </style>
+</head>
+<body>
+<div class="glow a" aria-hidden="true"></div>
+<div class="glow b" aria-hidden="true"></div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="hg" x1="31" y1="54" x2="77" y2="54" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2563EB"/><stop offset="1" stop-color="#14B386"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="../">
+      <svg viewBox="27 27 54 54" aria-hidden="true"><g fill="url(#hg)"><rect x="31" y="29" width="14" height="50" rx="5"/><rect x="63" y="29" width="14" height="50" rx="5"/><rect x="44" y="45" width="20" height="18"/></g><path d="M41,54 Q54,58.5 67,54" fill="none" stroke="#fff" stroke-width="4.5"/><path d="M35,54 L43,48.5 L43,59.5 Z" fill="#fff"/><path d="M73,54 L65,48.5 L65,59.5 Z" fill="#fff"/></svg>
+      Hawula
+    </a>
+    <div class="langs" role="group" aria-label="Language">
+      <button type="button" data-lang="en" aria-pressed="true">English</button>
+      <button type="button" data-lang="si" aria-pressed="false" lang="si">සිංහල</button>
+      <button type="button" data-lang="ta" aria-pressed="false" lang="ta">தமிழ்</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- English (default) -->
+  <div class="pane" lang="en" data-pane="en">
+    <div class="intro">
+      <h1><span class="grad">How Hawula works</span></h1>
+      <p class="lead">A quick look at the basics.</p>
+    </div>
+    <h2>Three simple steps</h2>
+    <ol class="steps">
+      <li><div><strong>Start a group</strong><span>Make a group for a trip, your flat or the office lunch, and invite friends with a code.</span></div></li>
+      <li><div><strong>Add what you spend</strong><span>Add an expense and choose who shares it. Everyone's balance updates on its own.</span></div></li>
+      <li><div><strong>Settle up</strong><span>See who owes whom, pay in whatever way suits you, and record it here.</span></div></li>
+    </ol>
+    <h2>Common questions</h2>
+    <details><summary>How is a bill split?</summary><p>Pick who shares it, then how: equally, by exact amounts, by percent, or by the items on a receipt. Hawula works out what each person owes the one who paid.</p></details>
+    <details><summary>How do I settle up?</summary><p>Open the group and tap Settle up. Hawula shows the fewest payments that square everyone up. Pay however suits you (cash, bank transfer, card, an online wallet…), then tap Mark as paid so the balances catch up.</p></details>
+    <details><summary>Can I add bills without signal?</summary><p>Yes. Bills and payments added without signal are kept on your phone and sent by themselves as soon as you're back online.</p></details>
+    <details><summary>How do repeating bills work?</summary><p>When adding a bill, set Repeat to every week, month or year, and optionally an end date. Hawula adds it again when it's due. Stop it any time from the group's Repeating bills.</p></details>
+    <details><summary>What does the app lock do?</summary><p>Under Profile → Security, Hawula can ask for your phone's own PIN, pattern, fingerprint or face before it opens. Hawula never sees or stores them.</p></details>
+    <details><summary>How do I delete my account?</summary><p>Settle up in every group first, then go to Help &amp; support → Delete my account. Your past bills stay for the others, under "Deleted user". <a href="../delete-account/">Step-by-step guide</a></p></details>
+    <h2>Still need help?</h2>
+    <p class="help">Email us at <a href="mailto:hawula.app@gmail.com">hawula.app@gmail.com</a>.</p>
+  </div>
+
+  <!-- Sinhala -->
+  <div class="pane" lang="si" data-pane="si" hidden>
+    <div class="intro">
+      <h1><span class="grad">Hawula ක්‍රියා කරන ආකාරය</span></h1>
+      <p class="lead">මූලික කරුණු පිළිබඳ ඉක්මන් බැල්මක්.</p>
+    </div>
+    <h2>සරල පියවර තුනක්</h2>
+    <ol class="steps">
+      <li><div><strong>කණ්ඩායමක් අරඹන්න</strong><span>ගමනක්, නිවසක් හෝ කාර්යාල දිවා ආහාරයක් සඳහා කණ්ඩායමක් සාදා, කේතයකින් මිතුරන්ට ආරාධනා කරන්න.</span></div></li>
+      <li><div><strong>ඔබේ වියදම් එක් කරන්න</strong><span>වියදමක් එක් කර එය බෙදා ගන්නේ කවුදැයි තෝරන්න. හැමෝගේම ශේෂය ස්වයංක්‍රීයව යාවත්කාලීන වේ.</span></div></li>
+      <li><div><strong>ගණන් බේරා ගන්න</strong><span>කවුරුන් කාට ණය දැයි බලා, ඔබට ගැලපෙන ආකාරයෙන් ගෙවා, එය මෙහි සටහන් කරන්න.</span></div></li>
+    </ol>
+    <h2>නිතර අසන ප්‍රශ්න</h2>
+    <details><summary>බිලක් බෙදන්නේ කෙසේද?</summary><p>එය බෙදාගන්නේ කවුරුන්දැයි තෝරා, පසුව ආකාරය තෝරන්න: සමානව, නිශ්චිත මුදල් අනුව, ප්‍රතිශතය අනුව, හෝ රිසිට්පතේ අයිතම අනුව. ගෙවූ අයට එක් එක් අය කොපමණ ණයදැයි Hawula ගණනය කරයි.</p></details>
+    <details><summary>පියවන්නේ කෙසේද?</summary><p>කණ්ඩායම විවෘත කර පියවන්න තට්ටු කරන්න. සියලු දෙනා පියවීමට අවශ්‍ය අවම ගෙවීම් Hawula පෙන්වයි. ඔබට ගැළපෙන ආකාරයට ගෙවා (මුදල්, බැංකු මාරුව, කාඩ්පත, ඔන්ලයින් ගෙවුම්…), ශේෂ යාවත්කාලීන වීමට ගෙවූ බව සලකුණු කරන්න.</p></details>
+    <details><summary>සංඥා නැතිව බිල් එක් කළ හැකිද?</summary><p>ඔව්. සංඥා නැතිව එක් කළ බිල් සහ ගෙවීම් ඔබේ දුරකථනයේ තබාගෙන, නැවත සම්බන්ධ වූ විගස ඉබේම යවනු ලැබේ.</p></details>
+    <details><summary>නැවත නැවත එන බිල් ක්‍රියා කරන්නේ කෙසේද?</summary><p>බිලක් එක් කරන විට නැවත යන්න සෑම සතියකම, මාසයකම හෝ වසරකම ලෙසත්, අවශ්‍ය නම් අවසන් දිනයක්ද සකසන්න. කාලය පැමිණි විට Hawula එය නැවත එක් කරයි. කණ්ඩායමේ නැවත නැවත එන බිල් වෙතින් ඕනෑම විටක නවත්වන්න.</p></details>
+    <details><summary>යෙදුම් අගුල කරන්නේ කුමක්ද?</summary><p>පැතිකඩ → ආරක්ෂාව යටතේ, Hawula විවෘත වීමට පෙර ඔබේ දුරකථනයේම PIN, රටාව, ඇඟිලි සලකුණ හෝ මුහුණ ඉල්ලිය හැක. Hawula ඒවා කිසිවිටෙක නොදකියි, ගබඩා නොකරයි.</p></details>
+    <details><summary>මගේ ගිණුම මකන්නේ කෙසේද?</summary><p>මුලින් සෑම කණ්ඩායමකම පියවා, පසුව උදව් සහ සහාය → මගේ ගිණුම මකන්න වෙත යන්න. ඔබේ පැරණි බිල් අනෙක් අයට "Deleted user" ලෙස රැඳී පවතී. <a href="../delete-account/">පියවරෙන් පියවර මඟපෙන්වීම</a></p></details>
+    <h2>තවත් උදව් අවශ්‍යද?</h2>
+    <p class="help"><a href="mailto:hawula.app@gmail.com">hawula.app@gmail.com</a> වෙත ඊමේල් කරන්න.</p>
+  </div>
+
+  <!-- Tamil -->
+  <div class="pane" lang="ta" data-pane="ta" hidden>
+    <div class="intro">
+      <h1><span class="grad">Hawula எப்படி வேலை செய்கிறது</span></h1>
+      <p class="lead">அடிப்படைகளைப் பற்றிய ஒரு சிறு பார்வை.</p>
+    </div>
+    <h2>மூன்று எளிய படிகள்</h2>
+    <ol class="steps">
+      <li><div><strong>குழுவைத் தொடங்குங்கள்</strong><span>பயணம், வீடு அல்லது அலுவலக மதிய உணவுக்கு ஒரு குழுவை உருவாக்கி, குறியீடு மூலம் நண்பர்களை அழையுங்கள்.</span></div></li>
+      <li><div><strong>செலவுகளைச் சேருங்கள்</strong><span>செலவைச் சேர்த்து யார் பகிர்கிறார்கள் என்பதைத் தேர்ந்தெடுங்கள். அனைவரின் மீதியும் தானாகவே புதுப்பிக்கப்படும்.</span></div></li>
+      <li><div><strong>கணக்கைத் தீர்த்துக்கொள்ளுங்கள்</strong><span>யார் யாருக்கு தர வேண்டும் எனப் பார்த்து, உங்களுக்கு ஏற்ற வழியில் செலுத்தி, இங்கே பதிவு செய்யுங்கள்.</span></div></li>
+    </ol>
+    <h2>அடிக்கடி கேட்கப்படும் கேள்விகள்</h2>
+    <details><summary>ஒரு பில் எப்படிப் பிரிக்கப்படுகிறது?</summary><p>யார் பகிர்கிறார்கள் என்று தேர்ந்தெடுத்து, பிறகு எப்படி என்று தேர்ந்தெடுங்கள்: சமமாக, சரியான தொகைகளாக, சதவீதமாக, அல்லது ரசீதில் உள்ள பொருட்களின்படி. செலுத்தியவருக்கு ஒவ்வொருவரும் எவ்வளவு தர வேண்டும் என்பதை Hawula கணக்கிடும்.</p></details>
+    <details><summary>கணக்கை எப்படித் தீர்ப்பது?</summary><p>குழுவைத் திறந்து கணக்கு தீர் என்பதைத் தட்டுங்கள். அனைவரையும் சமன்செய்யும் குறைந்த கட்டணங்களை Hawula காட்டும். உங்களுக்கு வசதியான வழியில் செலுத்தி (பணம், வங்கிப் பரிமாற்றம், அட்டை, ஆன்லைன் கட்டணம்…), இருப்புகள் புதுப்பிக்கப்பட செலுத்தப்பட்டது எனக் குறியுங்கள்.</p></details>
+    <details><summary>சிக்னல் இல்லாமல் பில்களைச் சேர்க்கலாமா?</summary><p>ஆம். சிக்னல் இல்லாமல் சேர்த்த பில்களும் கட்டணங்களும் உங்கள் தொலைபேசியில் வைக்கப்பட்டு, மீண்டும் இணைந்ததும் தானாக அனுப்பப்படும்.</p></details>
+    <details><summary>மீண்டும் வரும் பில்கள் எப்படிச் செயல்படுகின்றன?</summary><p>பில்லைச் சேர்க்கும்போது மீண்டும் என்பதை ஒவ்வொரு வாரம், மாதம் அல்லது ஆண்டு எனவும், விரும்பினால் முடிவு தேதியையும் அமையுங்கள். நேரம் வந்ததும் Hawula அதை மீண்டும் சேர்க்கும். குழுவின் மீண்டும் வரும் பில்களில் எப்போது வேண்டுமானாலும் நிறுத்தலாம்.</p></details>
+    <details><summary>செயலி பூட்டு என்ன செய்கிறது?</summary><p>சுயவிவரம் → பாதுகாப்பு என்பதில், Hawula திறப்பதற்கு முன் உங்கள் தொலைபேசியின் சொந்த PIN, பேட்டர்ன், கைரேகை அல்லது முகத்தைக் கேட்கலாம். Hawula அவற்றை ஒருபோதும் பார்ப்பதோ சேமிப்பதோ இல்லை.</p></details>
+    <details><summary>என் கணக்கை எப்படி நீக்குவது?</summary><p>முதலில் ஒவ்வொரு குழுவிலும் கணக்கைத் தீர்த்து, பிறகு உதவி மற்றும் ஆதரவு → என் கணக்கை நீக்கு என்பதற்குச் செல்லுங்கள். உங்கள் பழைய பில்கள் மற்றவர்களுக்கு "Deleted user" எனக் காட்டப்படும். <a href="../delete-account/">படிப்படியான வழிகாட்டி</a></p></details>
+    <h2>இன்னும் உதவி தேவையா?</h2>
+    <p class="help"><a href="mailto:hawula.app@gmail.com">hawula.app@gmail.com</a> முகவரிக்கு மின்னஞ்சல் அனுப்புங்கள்.</p>
+  </div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Hawula, operated by Rasheed Rafi, Sri Lanka</span>
+    <span><a href="../privacy/">Privacy</a><a href="../terms/">Terms</a><a href="../delete-account/">Delete account</a></span>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var langs = ['en', 'si', 'ta'];
+    var buttons = document.querySelectorAll('.langs button');
+    var panes = document.querySelectorAll('.pane');
+
+    function show(lang) {
+      if (langs.indexOf(lang) < 0) lang = 'en';
+      panes.forEach(function (p) { p.hidden = p.getAttribute('data-pane') !== lang; });
+      buttons.forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === lang)); });
+      document.documentElement.lang = lang;
+      try { localStorage.setItem('hawula-lang', lang); } catch (e) {}
+    }
+
+    buttons.forEach(function (b) {
+      b.addEventListener('click', function () {
+        var lang = b.getAttribute('data-lang');
+        show(lang);
+        try {
+          var u = new URL(location.href);
+          if (lang === 'en') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang);
+          history.replaceState(null, '', u);
+        } catch (e) {}
+      });
+    });
+
+    // A ?lang=si link wins, then the last choice, then English.
+    var start = 'en';
+    try { start = new URLSearchParams(location.search).get('lang') || localStorage.getItem('hawula-lang') || 'en'; } catch (e) {}
+    show(start);
+  })();
+</script>
+</body>
+</html>
