@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="How Hawula works: start a group, add what you spend, and settle up. Answers to common questions.">
+  <meta name="description" content="The Hawula guide: start a group, invite people, add and split bills, settle up, track spending as a couple, and see where the money goes.">
   <meta name="color-scheme" content="dark">
   <title>How Hawula works | Hawula</title>
   <link rel="icon" href="../hawula-icon.png">
@@ -30,14 +30,25 @@
     h1 { font-size: clamp(1.8rem, 5vw, 2.4rem); font-weight: 800; line-height: 1.3; margin: 0 0 10px; letter-spacing: -0.02em; }
     .grad { background: linear-gradient(90deg, var(--blue-soft), var(--green-soft)); -webkit-background-clip: text; background-clip: text; color: transparent; }
     .lead { color: var(--soft); font-size: 1.08rem; margin: 0; }
-    h2 { font-size: 1.2rem; margin: 40px 0 16px; }
-    ol.steps { list-style: none; counter-reset: s; margin: 0; padding: 0; display: grid; gap: 14px; }
-    ol.steps li { counter-increment: s; display: flex; gap: 16px; border: 1px solid var(--line); background: rgba(255,255,255,0.04);
-                  border-radius: 14px; padding: 18px 20px; }
-    ol.steps li::before { content: counter(s); flex: none; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center;
-                          font-weight: 700; color: #fff; background: linear-gradient(135deg, var(--blue), var(--green)); }
-    ol.steps strong { display: block; font-size: 1.05rem; margin-bottom: 2px; }
-    ol.steps span { color: var(--soft); }
+    h2 { font-size: 1.25rem; margin: 0 0 14px; }
+    nav.jump { display: flex; flex-wrap: wrap; gap: 8px; margin: 22px 0 6px; }
+    nav.jump a { color: var(--soft); text-decoration: none; font-size: 0.9rem; border: 1px solid var(--line); background: rgba(255,255,255,0.04);
+                 border-radius: 999px; padding: 4px 14px; }
+    nav.jump a:hover, nav.jump a:focus-visible { color: #fff; border-color: var(--blue-soft); outline: none; }
+    section.sec { margin-top: 40px; scroll-margin-top: 16px; }
+    section.sec > p { color: var(--soft); margin: 0 0 14px; }
+    .card { border: 1px solid var(--line); background: rgba(255,255,255,0.04); border-radius: 14px; padding: 18px 20px; margin-bottom: 12px; }
+    .card h3 { font-size: 1.02rem; margin: 0 0 8px; }
+    .card p { margin: 0 0 8px; color: var(--soft); }
+    .card p:last-child { margin-bottom: 0; }
+    ol.how { list-style: none; counter-reset: h; margin: 0; padding: 0; display: grid; gap: 10px; }
+    ol.how li { counter-increment: h; display: flex; gap: 12px; color: var(--soft); }
+    ol.how li::before { content: counter(h); flex: none; width: 24px; height: 24px; margin-top: 3px; border-radius: 50%; display: grid; place-items: center;
+                        font-size: 0.8rem; font-weight: 700; color: #fff; background: linear-gradient(135deg, var(--blue), var(--green)); }
+    ol.how b, .card b { color: #fff; font-weight: 600; }
+    ul.tips { margin: 0; padding-left: 20px; color: var(--soft); }
+    ul.tips li { margin-bottom: 4px; }
+    .tip { border-left: 3px solid var(--green); padding: 2px 0 2px 14px; margin: 12px 0 0; color: var(--soft); }
     details { border: 1px solid var(--line); background: rgba(255,255,255,0.04); border-radius: 14px; margin-bottom: 10px; }
     summary { cursor: pointer; padding: 14px 20px; font-weight: 600; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
     summary::-webkit-details-marker { display: none; }
@@ -45,7 +56,7 @@
     details[open] summary::after { content: "\2212"; }
     summary:focus-visible { outline: 2px solid var(--blue-soft); outline-offset: 2px; border-radius: 14px; }
     details p { margin: 0; padding: 0 20px 16px; color: var(--soft); }
-    .help a { color: var(--blue-soft); text-underline-offset: 3px; }
+    .help a, .card a { color: var(--blue-soft); text-underline-offset: 3px; }
     footer { border-top: 1px solid var(--line); margin-top: 48px; padding: 20px 0 40px; font-size: 0.9rem; color: var(--soft); }
     footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; }
     footer a { color: var(--soft); margin-right: 16px; }
@@ -85,69 +96,591 @@
   <div class="pane" lang="en" data-pane="en">
     <div class="intro">
       <h1><span class="grad">How Hawula works</span></h1>
-      <p class="lead">A quick look at the basics.</p>
+      <p class="lead">Everything you need, from your first group to your monthly spending.</p>
+      <nav class="jump" aria-label="Sections">
+        <a href="#en-start">Getting started</a>
+        <a href="#en-bills">Adding bills</a>
+        <a href="#en-settle">Settling up</a>
+        <a href="#en-track">Couples &amp; families</a>
+        <a href="#en-spending">Spending</a>
+        <a href="#en-history">History &amp; edits</a>
+        <a href="#en-account">Account &amp; security</a>
+        <a href="#en-faq">Questions</a>
+      </nav>
     </div>
-    <h2>Three simple steps</h2>
-    <ol class="steps">
-      <li><div><strong>Start a group</strong><span>Make a group for a trip, your flat or the office lunch, and invite friends with a code.</span></div></li>
-      <li><div><strong>Add what you spend</strong><span>Add an expense and choose who shares it. Everyone's balance updates on its own.</span></div></li>
-      <li><div><strong>Settle up</strong><span>See who owes whom, pay in whatever way suits you, and record it here.</span></div></li>
-    </ol>
-    <h2>Common questions</h2>
-    <details><summary>How is a bill split?</summary><p>Pick who shares it, then how: equally, by exact amounts, by percent, or by the items on a receipt. Hawula works out what each person owes the one who paid.</p></details>
-    <details><summary>How do I settle up?</summary><p>Open the group and tap Settle up. Hawula shows the fewest payments that square everyone up. Pay however suits you (cash, bank transfer, card, an online wallet…), then tap Mark as paid so the balances catch up.</p></details>
-    <details><summary>Can I add bills without signal?</summary><p>Yes. Bills and payments added without signal are kept on your phone and sent by themselves as soon as you're back online.</p></details>
-    <details><summary>How do repeating bills work?</summary><p>When adding a bill, set Repeat to every week, month or year, and optionally an end date. Hawula adds it again when it's due. Stop it any time from the group's Repeating bills.</p></details>
-    <details><summary>What does the app lock do?</summary><p>Under Profile → Security, Hawula can ask for your phone's own PIN, pattern, fingerprint or face before it opens. Hawula never sees or stores them.</p></details>
-    <details><summary>How do I delete my account?</summary><p>Settle up in every group first, then go to Help &amp; support → Delete my account. Your past bills stay for the others, under "Deleted user". <a href="../delete-account/">Step-by-step guide</a></p></details>
-    <h2>Still need help?</h2>
-    <p class="help">Email us at <a href="mailto:hawula.app@gmail.com">hawula.app@gmail.com</a>.</p>
+
+    <section class="sec" id="en-start">
+      <h2>1. Getting started</h2>
+      <div class="card">
+        <h3>Sign in and start a group</h3>
+        <ol class="how">
+          <li><span>Open Hawula and tap <b>Sign in with Google</b>.</span></li>
+          <li><span>Tap <b>New group</b>. Give it a name and pick what it's for: Trip, Home, Couple or Other.</span></li>
+          <li><span>Choose the currency the group's balances are counted in.</span></li>
+          <li><span>Decide how the group works. For friends and flatmates, leave it as is and bills are split. For a couple or a family that only wants to record spending, switch on <b>Just track spending</b> (see <a href="#en-track">Couples &amp; families</a>).</span></li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>Invite people</h3>
+        <ol class="how">
+          <li><span>Open the group and tap <b>Invite</b>.</span></li>
+          <li><span>Share the invite through any app: WhatsApp, a message, email. It includes a link and a code.</span></li>
+          <li><span>When your friend taps the link, Hawula opens and asks <b>Join this group?</b> with the group's name. One tap and they're in. If they don't have Hawula yet, the link takes them to Google Play first, then straight into the group after they install.</span></li>
+          <li><span>No link? They can open Hawula, tap <b>Join with a code</b> and type the code in.</span></li>
+        </ol>
+        <p class="tip">An invite works for 14 days. If it gets passed around too widely, open the group's menu and choose <b>Reset invite link</b>. The old code stops working at once and people already in the group stay.</p>
+      </div>
+    </section>
+
+    <section class="sec" id="en-bills">
+      <h2>2. Adding bills</h2>
+      <div class="card">
+        <h3>Add a bill</h3>
+        <ol class="how">
+          <li><span>Tap <b>Add expense</b> and enter what it was for and the amount. Pick a category and the date if you like.</span></li>
+          <li><span>Choose <b>Paid by</b>: you, someone else, or several people.</span></li>
+          <li><span>Choose who shares it. Tap a name to include them or leave them out.</span></li>
+          <li><span>Tap save. Everyone's balance updates on its own, and the others are notified.</span></li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>Four ways to split</h3>
+        <ul class="tips">
+          <li><b>Equally:</b> everyone ticked pays the same.</li>
+          <li><b>Exact amounts:</b> type what each person owes. The amounts must add up to the bill.</li>
+          <li><b>Percent:</b> type each person's part as a percentage. They must add up to 100.</li>
+          <li><b>Shares:</b> type a number for each person. Someone with 2 pays double someone with 1.</li>
+        </ul>
+        <p class="tip">Have a receipt? Choose <b>Split by items</b>, put in the items, then tap who had each one. The service charge is shared fairly on top.</p>
+      </div>
+      <div class="card">
+        <h3>Repeating bills</h3>
+        <p>For rent, subscriptions and the like, set <b>Repeat</b> to every week, month or year, and optionally an end date. Hawula adds the bill again when it's due. Stop it any time from the group's <b>Repeating bills</b>.</p>
+      </div>
+      <div class="card">
+        <h3>No signal?</h3>
+        <p>Keep adding. Bills and payments made offline are kept on your phone and sent by themselves as soon as you're back online.</p>
+      </div>
+    </section>
+
+    <section class="sec" id="en-settle">
+      <h2>3. Balances and settling up</h2>
+      <p>Each group shows who is owed and who owes, in the group's currency.</p>
+      <div class="card">
+        <h3>Settle up</h3>
+        <ol class="how">
+          <li><span>Open the group and tap <b>Settle up</b>.</span></li>
+          <li><span>Hawula shows the fewest payments that square everyone up.</span></li>
+          <li><span>Pay however suits you: cash, bank transfer, card, an online wallet. Hawula doesn't move money itself.</span></li>
+          <li><span>The person who was paid taps <b>Mark as paid</b> so the balances catch up.</span></li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>Prefer to see who owes whom directly?</h3>
+        <p>Open the group's menu and turn off <b>Simplify debts</b>. Settle up then shows exactly who owes whom, with no shortcuts through other people.</p>
+      </div>
+    </section>
+
+    <section class="sec" id="en-track">
+      <h2>4. Couples and families: just track spending</h2>
+      <p>Some groups don't split anything. A couple sharing a home, a family, a household. They just want to see where the money goes. Hawula has a mode for that.</p>
+      <div class="card">
+        <h3>How it works</h3>
+        <ul class="tips">
+          <li>Bills are <b>recorded only</b>. Nobody owes anybody and there's no settling up.</li>
+          <li>Adding a bill is quicker: just the amount, what for, and who paid.</li>
+          <li>Everyone in the group gets a notification for <b>each new bill</b>, so you both always know.</li>
+          <li>The group page shows <b>Spent this month</b> instead of balances.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Turn it on or off</h3>
+        <ol class="how">
+          <li><span>When starting a group, switch on <b>Just track spending</b>. It's on by default when you pick Couple.</span></li>
+          <li><span>Later, the group's <b>owner</b> can change it from the group's menu. Switching it off means bills are split again from then on.</span></li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>Too many notifications?</h3>
+        <p>Open the group's menu and turn off <b>Notify me about every expense</b>. It only affects you. The others still get theirs.</p>
+      </div>
+    </section>
+
+    <section class="sec" id="en-spending">
+      <h2>5. Spending: where does the money go?</h2>
+      <p>Open any group and tap <b>Spending</b>. It works the same whether the group splits bills or only tracks them.</p>
+      <div class="card">
+        <h3>The overview</h3>
+        <ul class="tips">
+          <li><b>This month</b> against last month, with how much it's gone up or down.</li>
+          <li>A chart of the last six months. A new group starts from its first month, with no empty past.</li>
+          <li><b>Who paid:</b> one bar showing each person's share of what was paid.</li>
+          <li><b>By category:</b> food, rent, transport and so on, biggest first.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Go deeper</h3>
+        <ol class="how">
+          <li><span>Tap a month on the chart, then tap it again (or tap <b>See bills</b>) to open that month.</span></li>
+          <li><span>You'll see every bill that month, grouped by category. Tap a category to open its bills, and tap a bill to see it in full.</span></li>
+          <li><span>Back on the overview, tap a category to see just those bills in <b>History</b>.</span></li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>Everyone's spending or just yours</h3>
+        <p>Switch to <b>My share</b> to count only your part of each bill. Switch back to see the whole group.</p>
+      </div>
+    </section>
+
+    <section class="sec" id="en-history">
+      <h2>6. History and edits</h2>
+      <div class="card">
+        <h3>Find a bill</h3>
+        <ol class="how">
+          <li><span>Open the group's <b>History</b>.</span></li>
+          <li><span>Filter by <b>All</b>, <b>Bills</b> or <b>Payments</b>, or search by name.</span></li>
+          <li><span>Tap an item to see who paid, who shared it and when.</span></li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>Fix a mistake</h3>
+        <p>Open a bill and choose <b>Edit expense</b> to change the amount, the split, the category or anything else. You can also delete it: it comes off everyone's balances and the group sees in <b>Activity</b> that it was deleted.</p>
+      </div>
+      <div class="card">
+        <h3>Activity</h3>
+        <p>The Activity tab lists what's been happening in all your groups: new bills, payments, people joining.</p>
+      </div>
+      <div class="card">
+        <h3>Leaving a group, or removing someone</h3>
+        <p>You can leave a group once your balance is zero, so settle up first. The group's history stays for everyone else, your name stays on past bills, and you can rejoin later with an invite. The owner can remove someone from the group's member list. Their past bills stay.</p>
+      </div>
+    </section>
+
+    <section class="sec" id="en-account">
+      <h2>7. Your account and security</h2>
+      <div class="card">
+        <h3>Notifications</h3>
+        <p>Under <b>Profile</b>, turn notifications on to hear when someone adds a bill with you or pays you back. If they're blocked in your phone's settings, Hawula tells you.</p>
+      </div>
+      <div class="card">
+        <h3>App lock</h3>
+        <p>Under <b>Profile → Security</b>, Hawula can ask for your phone's own PIN, pattern, fingerprint or face before it opens. Hawula never sees or stores them.</p>
+      </div>
+      <div class="card">
+        <h3>Language</h3>
+        <p>Hawula is in English, Sinhala and Tamil. Change it under <b>Profile → Language</b>, or leave it on your phone's language.</p>
+      </div>
+      <div class="card">
+        <h3>Delete your account</h3>
+        <p>Settle up in every group first, then go to <b>Help &amp; support → Delete my account</b>. Your past bills stay for the others, under "Deleted user". <a href="../delete-account/">Step-by-step guide</a></p>
+      </div>
+    </section>
+
+    <section class="sec" id="en-faq">
+      <h2>8. Common questions</h2>
+      <details><summary>How is a bill split?</summary><p>Pick who shares it, then how: equally, by exact amounts, by percent, by shares, or by the items on a receipt. Hawula works out what each person owes the one who paid.</p></details>
+      <details><summary>How do I settle up?</summary><p>Open the group and tap Settle up. Hawula shows the fewest payments that square everyone up. Pay however suits you, then tap Mark as paid so the balances catch up.</p></details>
+      <details><summary>Can I add bills without signal?</summary><p>Yes. Bills and payments added without signal are kept on your phone and sent by themselves as soon as you're back online.</p></details>
+      <details><summary>The invite link didn't open the group. What now?</summary><p>Ask for the code instead: open Hawula, tap Join with a code and type it in. If the code has stopped working, it may be older than 14 days or reset, so ask for a fresh invite.</p></details>
+      <details><summary>Can a group switch between splitting and just tracking?</summary><p>Yes, the owner can change it any time from the group's menu. Bills added before the change keep the way they were recorded.</p></details>
+      <details><summary>What does the app lock do?</summary><p>Under Profile → Security, Hawula can ask for your phone's own PIN, pattern, fingerprint or face before it opens. Hawula never sees or stores them.</p></details>
+      <h2 style="margin-top:32px">Still need help?</h2>
+      <p class="help">Email us at <a href="mailto:hawula.app@gmail.com">hawula.app@gmail.com</a>. In the app, <b>Help &amp; support → Report a problem</b> fills in your app version for us.</p>
+    </section>
   </div>
 
   <!-- Sinhala -->
   <div class="pane" lang="si" data-pane="si" hidden>
     <div class="intro">
       <h1><span class="grad">Hawula ක්‍රියා කරන ආකාරය</span></h1>
-      <p class="lead">මූලික කරුණු පිළිබඳ ඉක්මන් බැල්මක්.</p>
+      <p class="lead">ඔබේ පළමු කණ්ඩායමේ සිට මාසික වියදම් දක්වා ඔබට අවශ්‍ය සියල්ල.</p>
+      <nav class="jump" aria-label="කොටස්">
+        <a href="#si-start">ආරම්භය</a>
+        <a href="#si-bills">බිල් එක් කිරීම</a>
+        <a href="#si-settle">පියවීම</a>
+        <a href="#si-track">යුවළ සහ පවුල්</a>
+        <a href="#si-spending">වියදම්</a>
+        <a href="#si-history">ඉතිහාසය සහ සංස්කරණ</a>
+        <a href="#si-account">ගිණුම සහ ආරක්ෂාව</a>
+        <a href="#si-faq">ප්‍රශ්න</a>
+      </nav>
     </div>
-    <h2>සරල පියවර තුනක්</h2>
-    <ol class="steps">
-      <li><div><strong>කණ්ඩායමක් අරඹන්න</strong><span>ගමනක්, නිවසක් හෝ කාර්යාල දිවා ආහාරයක් සඳහා කණ්ඩායමක් සාදා, කේතයකින් මිතුරන්ට ආරාධනා කරන්න.</span></div></li>
-      <li><div><strong>ඔබේ වියදම් එක් කරන්න</strong><span>වියදමක් එක් කර එය බෙදා ගන්නේ කවුදැයි තෝරන්න. හැමෝගේම ශේෂය ස්වයංක්‍රීයව යාවත්කාලීන වේ.</span></div></li>
-      <li><div><strong>ගණන් බේරා ගන්න</strong><span>කවුරුන් කාට ණය දැයි බලා, ඔබට ගැලපෙන ආකාරයෙන් ගෙවා, එය මෙහි සටහන් කරන්න.</span></div></li>
-    </ol>
-    <h2>නිතර අසන ප්‍රශ්න</h2>
-    <details><summary>බිලක් බෙදන්නේ කෙසේද?</summary><p>එය බෙදාගන්නේ කවුරුන්දැයි තෝරා, පසුව ආකාරය තෝරන්න: සමානව, නිශ්චිත මුදල් අනුව, ප්‍රතිශතය අනුව, හෝ රිසිට්පතේ අයිතම අනුව. ගෙවූ අයට එක් එක් අය කොපමණ ණයදැයි Hawula ගණනය කරයි.</p></details>
-    <details><summary>පියවන්නේ කෙසේද?</summary><p>කණ්ඩායම විවෘත කර පියවන්න තට්ටු කරන්න. සියලු දෙනා පියවීමට අවශ්‍ය අවම ගෙවීම් Hawula පෙන්වයි. ඔබට ගැළපෙන ආකාරයට ගෙවා (මුදල්, බැංකු මාරුව, කාඩ්පත, ඔන්ලයින් ගෙවුම්…), ශේෂ යාවත්කාලීන වීමට ගෙවූ බව සලකුණු කරන්න.</p></details>
-    <details><summary>සංඥා නැතිව බිල් එක් කළ හැකිද?</summary><p>ඔව්. සංඥා නැතිව එක් කළ බිල් සහ ගෙවීම් ඔබේ දුරකථනයේ තබාගෙන, නැවත සම්බන්ධ වූ විගස ඉබේම යවනු ලැබේ.</p></details>
-    <details><summary>නැවත නැවත එන බිල් ක්‍රියා කරන්නේ කෙසේද?</summary><p>බිලක් එක් කරන විට නැවත යන්න සෑම සතියකම, මාසයකම හෝ වසරකම ලෙසත්, අවශ්‍ය නම් අවසන් දිනයක්ද සකසන්න. කාලය පැමිණි විට Hawula එය නැවත එක් කරයි. කණ්ඩායමේ නැවත නැවත එන බිල් වෙතින් ඕනෑම විටක නවත්වන්න.</p></details>
-    <details><summary>යෙදුම් අගුල කරන්නේ කුමක්ද?</summary><p>පැතිකඩ → ආරක්ෂාව යටතේ, Hawula විවෘත වීමට පෙර ඔබේ දුරකථනයේම PIN, රටාව, ඇඟිලි සලකුණ හෝ මුහුණ ඉල්ලිය හැක. Hawula ඒවා කිසිවිටෙක නොදකියි, ගබඩා නොකරයි.</p></details>
-    <details><summary>මගේ ගිණුම මකන්නේ කෙසේද?</summary><p>මුලින් සෑම කණ්ඩායමකම පියවා, පසුව උදව් සහ සහාය → මගේ ගිණුම මකන්න වෙත යන්න. ඔබේ පැරණි බිල් අනෙක් අයට "Deleted user" ලෙස රැඳී පවතී. <a href="../delete-account/">පියවරෙන් පියවර මඟපෙන්වීම</a></p></details>
-    <h2>තවත් උදව් අවශ්‍යද?</h2>
-    <p class="help"><a href="mailto:hawula.app@gmail.com">hawula.app@gmail.com</a> වෙත ඊමේල් කරන්න.</p>
+
+    <section class="sec" id="si-start">
+      <h2>1. ආරම්භය</h2>
+      <div class="card">
+        <h3>ඇතුළු වී කණ්ඩායමක් අරඹන්න</h3>
+        <ol class="how">
+          <li><span>Hawula විවෘත කර <b>Google සමඟ ඇතුළු වන්න</b> තට්ටු කරන්න.</span></li>
+          <li><span><b>නව කණ්ඩායම</b> තට්ටු කරන්න. නමක් දී, එය කුමක් සඳහාදැයි තෝරන්න: ගමනක්, නිවසක්, යුවළක් හෝ වෙනත්.</span></li>
+          <li><span>කණ්ඩායමේ ශේෂ ගණන් කරන මුදල් වර්ගය තෝරන්න.</span></li>
+          <li><span>කණ්ඩායම ක්‍රියා කරන ආකාරය තීරණය කරන්න. මිතුරන් හෝ නිවසේ අය සඳහා එලෙසම තැබුවොත් බිල් බෙදේ. වියදම් සටහන් කිරීමට පමණක් කැමති යුවළක් හෝ පවුලක් සඳහා <b>වියදම් පමණක් සටහන් කරන්න</b> ක්‍රියාත්මක කරන්න (<a href="#si-track">යුවළ සහ පවුල්</a> බලන්න).</span></li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>අය ආරාධනා කරන්න</h3>
+        <ol class="how">
+          <li><span>කණ්ඩායම විවෘත කර <b>ආරාධනා කරන්න</b> තට්ටු කරන්න.</span></li>
+          <li><span>WhatsApp, පණිවිඩයක්, ඊමේල් වැනි ඕනෑම යෙදුමකින් ආරාධනාව බෙදාගන්න. එහි සබැඳියක් සහ කේතයක් ඇත.</span></li>
+          <li><span>ඔබේ මිතුරා සබැඳිය තට්ටු කළ විට Hawula විවෘත වී කණ්ඩායමේ නම සමඟ <b>මෙම කණ්ඩායමට එක්වන්නද?</b> යනුවෙන් අසයි. එක් තට්ටුවකින් ඔවුන් ඇතුළු වේ. ඔවුන්ට තවම Hawula නැත්නම්, සබැඳිය මුලින් Google Play වෙත ගෙන යයි; ස්ථාපනය කළ පසු කෙලින්ම කණ්ඩායමට යයි.</span></li>
+          <li><span>සබැඳියක් නැද්ද? ඔවුන්ට Hawula විවෘත කර <b>කේතයකින් එක්වන්න</b> තට්ටු කර කේතය ටයිප් කළ හැක.</span></li>
+        </ol>
+        <p class="tip">ආරාධනාවක් දින 14ක් වලංගුයි. එය ඕනෑවට වඩා පැතිරුණොත්, කණ්ඩායමේ මෙනුවෙන් <b>ආරාධනා සබැඳිය යළි සකසන්න</b> තෝරන්න. පැරණි කේතය වහාම ක්‍රියා නොකරයි; දැනටමත් කණ්ඩායමේ සිටින අය රැඳේ.</p>
+      </div>
+    </section>
+
+    <section class="sec" id="si-bills">
+      <h2>2. බිල් එක් කිරීම</h2>
+      <div class="card">
+        <h3>බිලක් එක් කරන්න</h3>
+        <ol class="how">
+          <li><span><b>වියදමක් එක් කරන්න</b> තට්ටු කර එය කුමකටදැයි සහ මුදල ඇතුළත් කරන්න. කැමති නම් ප්‍රවර්ගයක් සහ දිනය තෝරන්න.</span></li>
+          <li><span><b>ගෙවූ අය</b> තෝරන්න: ඔබ, වෙනත් කෙනෙක්, හෝ කිහිප දෙනෙක්.</span></li>
+          <li><span>එය බෙදාගන්නේ කවුදැයි තෝරන්න. නමක් තට්ටු කර ඇතුළත් කරන්න හෝ ඉවත් කරන්න.</span></li>
+          <li><span>සුරකින්න තට්ටු කරන්න. හැමෝගේම ශේෂය ඉබේම යාවත්කාලීන වන අතර අනෙක් අයට දැනුම් දෙයි.</span></li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>බෙදන ක්‍රම හතරක්</h3>
+        <ul class="tips">
+          <li><b>සමානව:</b> ටික් කළ සියලු දෙනා එකම මුදලක් ගෙවයි.</li>
+          <li><b>නිශ්චිත මුදල්:</b> එක් එක් අය ණය මුදල ටයිප් කරන්න. එකතුව බිලට සමාන විය යුතුය.</li>
+          <li><b>ප්‍රතිශතය:</b> එක් එක් අයගේ කොටස ප්‍රතිශතයක් ලෙස ටයිප් කරන්න. එකතුව 100 විය යුතුය.</li>
+          <li><b>කොටස්:</b> එක් එක් අයට අංකයක් ටයිප් කරන්න. 2 ඇති කෙනා 1 ඇති කෙනාට වඩා දෙගුණයක් ගෙවයි.</li>
+        </ul>
+        <p class="tip">රිසිට්පතක් තිබේද? <b>අයිතම අනුව බෙදන්න</b> තෝරා, අයිතම ඇතුළත් කර, එක් එක් අයිතමය කවුරුන්ට ලැබුණේදැයි තට්ටු කරන්න. සේවා ගාස්තුව උඩින් සාධාරණව බෙදේ.</p>
+      </div>
+      <div class="card">
+        <h3>නැවත නැවත එන බිල්</h3>
+        <p>කුලිය, දායකත්ව වැනි දේවලට <b>නැවත යන්න</b> සෑම සතියකම, මාසයකම හෝ වසරකම ලෙසත්, අවශ්‍ය නම් අවසන් දිනයක්ද සකසන්න. කාලය පැමිණි විට Hawula බිල නැවත එක් කරයි. කණ්ඩායමේ <b>නැවත නැවත එන බිල්</b> වෙතින් ඕනෑම විටක නවත්වන්න.</p>
+      </div>
+      <div class="card">
+        <h3>සංඥා නැද්ද?</h3>
+        <p>එක් කරමින් සිටින්න. සංඥා නැතිව එක් කළ බිල් සහ ගෙවීම් ඔබේ දුරකථනයේ තබාගෙන, නැවත සම්බන්ධ වූ විගස ඉබේම යවනු ලැබේ.</p>
+      </div>
+    </section>
+
+    <section class="sec" id="si-settle">
+      <h2>3. ශේෂ සහ පියවීම</h2>
+      <p>සෑම කණ්ඩායමක්ම, කණ්ඩායමේ මුදල් වර්ගයෙන්, කවුරුන්ට ලැබිය යුතුද සහ කවුරුන් ණයදැයි පෙන්වයි.</p>
+      <div class="card">
+        <h3>පියවන්න</h3>
+        <ol class="how">
+          <li><span>කණ්ඩායම විවෘත කර <b>පියවන්න</b> තට්ටු කරන්න.</span></li>
+          <li><span>සියලු දෙනා පියවීමට අවශ්‍ය අවම ගෙවීම් Hawula පෙන්වයි.</span></li>
+          <li><span>ඔබට ගැළපෙන ආකාරයට ගෙවන්න: මුදල්, බැංකු මාරුව, කාඩ්පත, ඔන්ලයින් ගෙවුම්. Hawula මුදල් ගෙනයාමක් කරන්නේ නැත.</span></li>
+          <li><span>ගෙවීම ලැබූ අය ශේෂ යාවත්කාලීන වීමට <b>ගෙවූ බව සලකුණු කරන්න</b> තට්ටු කරයි.</span></li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>කවුරුන් කාට ණයදැයි කෙලින්ම බැලීමට කැමතිද?</h3>
+        <p>කණ්ඩායමේ මෙනුව විවෘත කර <b>ණය සරල කරන්න</b> අක්‍රිය කරන්න. එවිට පියවන්න මගින් වෙනත් අය හරහා කෙටිමං නැතිව කවුරුන් කාට ණයදැයි හරියටම පෙන්වයි.</p>
+      </div>
+    </section>
+
+    <section class="sec" id="si-track">
+      <h2>4. යුවළ සහ පවුල්: වියදම් පමණක් සටහන් කරන්න</h2>
+      <p>සමහර කණ්ඩායම් කිසිවක් බෙදන්නේ නැත. නිවසක් බෙදාගන්නා යුවළක්, පවුලක්. ඔවුන්ට අවශ්‍ය මුදල් යන්නේ කොතැනටදැයි බැලීමට පමණි. Hawula හි ඒ සඳහා ක්‍රමයක් ඇත.</p>
+      <div class="card">
+        <h3>ක්‍රියා කරන ආකාරය</h3>
+        <ul class="tips">
+          <li>බිල් <b>සටහන් පමණයි</b>. කිසිවෙකු කිසිවෙකුට ණය නොවේ, පියවීමක්ද නැත.</li>
+          <li>බිලක් එක් කිරීම වේගවත්: මුදල, කුමකටද, සහ ගෙවූ අය පමණි.</li>
+          <li>කණ්ඩායමේ සැමට <b>සෑම නව බිලක්ම</b> සඳහා දැනුම්දීමක් ලැබෙන නිසා ඔබ දෙදෙනාම සැමවිටම දනී.</li>
+          <li>කණ්ඩායම් පිටුවේ ශේෂ වෙනුවට <b>මෙම මාසයේ වියදම</b> පෙන්වයි.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>ක්‍රියාත්මක/අක්‍රිය කරන්න</h3>
+        <ol class="how">
+          <li><span>කණ්ඩායමක් අරඹන විට <b>වියදම් පමණක් සටහන් කරන්න</b> ක්‍රියාත්මක කරන්න. යුවළ තෝරන විට එය මුලින්ම ක්‍රියාත්මකයි.</span></li>
+          <li><span>පසුව කණ්ඩායමේ <b>හිමිකරුට</b> කණ්ඩායමේ මෙනුවෙන් එය වෙනස් කළ හැක. අක්‍රිය කළොත් එතැන් සිට බිල් නැවත බෙදේ.</span></li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>දැනුම්දීම් වැඩිද?</h3>
+        <p>කණ්ඩායමේ මෙනුව විවෘත කර <b>සෑම වියදමක්ම ගැන මට දැනුම් දෙන්න</b> අක්‍රිය කරන්න. එය බලපාන්නේ ඔබට පමණි. අනෙක් අයට තවමත් ලැබේ.</p>
+      </div>
+    </section>
+
+    <section class="sec" id="si-spending">
+      <h2>5. වියදම්: මුදල් යන්නේ කොතැනටද?</h2>
+      <p>ඕනෑම කණ්ඩායමක් විවෘත කර <b>වියදම්</b> තට්ටු කරන්න. කණ්ඩායම බිල් බෙදුවත් සටහන් කළත් එය එලෙසම ක්‍රියා කරයි.</p>
+      <div class="card">
+        <h3>දළ විශ්ලේෂණය</h3>
+        <ul class="tips">
+          <li><b>මෙම මාසය</b> පසුගිය මාසය සමඟ, ඉහළ හෝ පහළ ගිය ප්‍රමාණය සමඟ.</li>
+          <li>පසුගිය මාස හයේ ප්‍රස්තාරයක්. නව කණ්ඩායමක් එහි පළමු මාසයෙන් ආරම්භ වේ; හිස් අතීතයක් නැත.</li>
+          <li><b>ගෙවූ අය:</b> ගෙවූ මුදලින් එක් එක් අයගේ කොටස පෙන්වන තනි තීරුවක්.</li>
+          <li><b>ප්‍රවර්ග අනුව:</b> ආහාර, කුලිය, ප්‍රවාහනය ආදිය, විශාලම මුලින්.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>ගැඹුරට යන්න</h3>
+        <ol class="how">
+          <li><span>ප්‍රස්තාරයේ මාසයක් තට්ටු කර, නැවත තට්ටු කරන්න (හෝ <b>බිල් බලන්න</b> තට්ටු කරන්න) ඒ මාසය විවෘත කිරීමට.</span></li>
+          <li><span>ඒ මාසයේ සියලු බිල් ප්‍රවර්ග අනුව දැකිය හැක. ප්‍රවර්ගයක් තට්ටු කර එහි බිල් විවෘත කරන්න, බිලක් තට්ටු කර සම්පූර්ණයෙන් බලන්න.</span></li>
+          <li><span>දළ විශ්ලේෂණයේදී, ප්‍රවර්ගයක් තට්ටු කර <b>ඉතිහාසයේ</b> එම බිල් පමණක් බලන්න.</span></li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>සැමගේ වියදම හෝ ඔබේ පමණක්</h3>
+        <p>බිලක ඔබේ කොටස පමණක් ගණන් ගැනීමට <b>මගේ කොටස</b> වෙත මාරු වන්න. මුළු කණ්ඩායම බැලීමට නැවත මාරු වන්න.</p>
+      </div>
+    </section>
+
+    <section class="sec" id="si-history">
+      <h2>6. ඉතිහාසය සහ සංස්කරණ</h2>
+      <div class="card">
+        <h3>බිලක් සොයන්න</h3>
+        <ol class="how">
+          <li><span>කණ්ඩායමේ <b>ඉතිහාසය</b> විවෘත කරන්න.</span></li>
+          <li><span><b>සියල්ල</b>, <b>බිල්</b> හෝ <b>ගෙවීම්</b> අනුව පෙරන්න, හෝ නමින් සොයන්න.</span></li>
+          <li><span>අයිතමයක් තට්ටු කර කවුරුන් ගෙවූවාදැයි, කවුරුන් බෙදාගත්තාදැයි, කවදාදැයි බලන්න.</span></li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>වැරැද්දක් නිවැරදි කරන්න</h3>
+        <p>බිලක් විවෘත කර <b>වියදම සංස්කරණය</b> තෝරා මුදල, බෙදීම, ප්‍රවර්ගය හෝ වෙනත් ඕනෑම දෙයක් වෙනස් කරන්න. එය මකා දැමීමටද හැක: එය සැමගේ ශේෂවලින් ඉවත් වන අතර එය මකා ඇති බව කණ්ඩායමට <b>ක්‍රියාකාරකම්</b> තුළ පෙනේ.</p>
+      </div>
+      <div class="card">
+        <h3>ක්‍රියාකාරකම්</h3>
+        <p>ක්‍රියාකාරකම් පටිත්ත ඔබේ සියලු කණ්ඩායම්වල සිදුවන දේ පෙන්වයි: නව බිල්, ගෙවීම්, එක්වන අය.</p>
+      </div>
+      <div class="card">
+        <h3>කණ්ඩායමකින් ඉවත්වීම, හෝ කෙනෙකු ඉවත් කිරීම</h3>
+        <p>ඔබේ ශේෂය බිංදුව වූ පසු කණ්ඩායමකින් ඉවත් විය හැකි නිසා මුලින් පියවන්න. කණ්ඩායමේ ඉතිහාසය අනෙක් අයට රැඳේ, පැරණි බිල්වල ඔබේ නම රැඳේ, පසුව ආරාධනාවකින් නැවත එක්විය හැක. හිමිකරුට කණ්ඩායමේ සාමාජික ලැයිස්තුවෙන් කෙනෙකු ඉවත් කළ හැක. ඔවුන්ගේ පැරණි බිල් රැඳේ.</p>
+      </div>
+    </section>
+
+    <section class="sec" id="si-account">
+      <h2>7. ඔබේ ගිණුම සහ ආරක්ෂාව</h2>
+      <div class="card">
+        <h3>දැනුම්දීම්</h3>
+        <p><b>පැතිකඩ</b> යටතේ, කවුරුන් හෝ ඔබ සමඟ බිලක් එක් කළ විට හෝ ඔබට ආපසු ගෙවූ විට දැනගැනීමට දැනුම්දීම් ක්‍රියාත්මක කරන්න. ඒවා ඔබේ දුරකථන සැකසුම්වල අවහිර කර ඇත්නම් Hawula ඔබට කියයි.</p>
+      </div>
+      <div class="card">
+        <h3>යෙදුම් අගුල</h3>
+        <p><b>පැතිකඩ → ආරක්ෂාව</b> යටතේ, Hawula විවෘත වීමට පෙර ඔබේ දුරකථනයේම PIN, රටාව, ඇඟිලි සලකුණ හෝ මුහුණ ඉල්ලිය හැක. Hawula ඒවා කිසිවිටෙක නොදකියි, ගබඩා නොකරයි.</p>
+      </div>
+      <div class="card">
+        <h3>භාෂාව</h3>
+        <p>Hawula ඉංග්‍රීසි, සිංහල සහ දෙමළ භාෂාවලින් ඇත. එය <b>පැතිකඩ → භාෂාව</b> යටතේ වෙනස් කරන්න, නැත්නම් ඔබේ දුරකථනයේ භාෂාවෙන්ම තබන්න.</p>
+      </div>
+      <div class="card">
+        <h3>ගිණුම මකන්න</h3>
+        <p>මුලින් සෑම කණ්ඩායමකම පියවා, පසුව <b>උදව් සහ සහාය → මගේ ගිණුම මකන්න</b> වෙත යන්න. ඔබේ පැරණි බිල් අනෙක් අයට "Deleted user" ලෙස රැඳී පවතී. <a href="../delete-account/">පියවරෙන් පියවර මඟපෙන්වීම</a></p>
+      </div>
+    </section>
+
+    <section class="sec" id="si-faq">
+      <h2>8. නිතර අසන ප්‍රශ්න</h2>
+      <details><summary>බිලක් බෙදන්නේ කෙසේද?</summary><p>එය බෙදාගන්නේ කවුරුන්දැයි තෝරා, පසුව ආකාරය තෝරන්න: සමානව, නිශ්චිත මුදල් අනුව, ප්‍රතිශතය අනුව, කොටස් අනුව, හෝ රිසිට්පතේ අයිතම අනුව. ගෙවූ අයට එක් එක් අය කොපමණ ණයදැයි Hawula ගණනය කරයි.</p></details>
+      <details><summary>පියවන්නේ කෙසේද?</summary><p>කණ්ඩායම විවෘත කර පියවන්න තට්ටු කරන්න. සියලු දෙනා පියවීමට අවශ්‍ය අවම ගෙවීම් Hawula පෙන්වයි. ඔබට ගැළපෙන ආකාරයට ගෙවා, ශේෂ යාවත්කාලීන වීමට ගෙවූ බව සලකුණු කරන්න.</p></details>
+      <details><summary>සංඥා නැතිව බිල් එක් කළ හැකිද?</summary><p>ඔව්. සංඥා නැතිව එක් කළ බිල් සහ ගෙවීම් ඔබේ දුරකථනයේ තබාගෙන, නැවත සම්බන්ධ වූ විගස ඉබේම යවනු ලැබේ.</p></details>
+      <details><summary>ආරාධනා සබැඳිය කණ්ඩායම විවෘත කළේ නැත. දැන් කුමක් කරන්නද?</summary><p>ඒ වෙනුවට කේතය ඉල්ලන්න: Hawula විවෘත කර කේතයකින් එක්වන්න තට්ටු කර එය ටයිප් කරන්න. කේතය ක්‍රියා නොකරන්නේ නම්, එය දින 14කට වඩා පැරණි හෝ යළි සකසා ඇති නිසා විය හැක; නව ආරාධනාවක් ඉල්ලන්න.</p></details>
+      <details><summary>කණ්ඩායමකට බෙදීම සහ සටහන් කිරීම අතර මාරු විය හැකිද?</summary><p>ඔව්, හිමිකරුට ඕනෑම විටක කණ්ඩායමේ මෙනුවෙන් එය වෙනස් කළ හැක. වෙනසට පෙර එක් කළ බිල් සටහන් වූ ආකාරයෙන්ම රැඳේ.</p></details>
+      <details><summary>යෙදුම් අගුල කරන්නේ කුමක්ද?</summary><p>පැතිකඩ → ආරක්ෂාව යටතේ, Hawula විවෘත වීමට පෙර ඔබේ දුරකථනයේම PIN, රටාව, ඇඟිලි සලකුණ හෝ මුහුණ ඉල්ලිය හැක. Hawula ඒවා කිසිවිටෙක නොදකියි, ගබඩා නොකරයි.</p></details>
+      <h2 style="margin-top:32px">තවත් උදව් අවශ්‍යද?</h2>
+      <p class="help"><a href="mailto:hawula.app@gmail.com">hawula.app@gmail.com</a> වෙත ඊමේල් කරන්න. යෙදුම තුළ, <b>උදව් සහ සහාය → ගැටලුවක් වාර්තා කරන්න</b> මඟින් ඔබේ යෙදුම් අනුවාදය අප වෙනුවෙන් පුරවයි.</p>
+    </section>
   </div>
 
   <!-- Tamil -->
   <div class="pane" lang="ta" data-pane="ta" hidden>
     <div class="intro">
       <h1><span class="grad">Hawula எப்படி வேலை செய்கிறது</span></h1>
-      <p class="lead">அடிப்படைகளைப் பற்றிய ஒரு சிறு பார்வை.</p>
+      <p class="lead">உங்கள் முதல் குழுவிலிருந்து மாதாந்திரச் செலவு வரை தேவையான அனைத்தும்.</p>
+      <nav class="jump" aria-label="பிரிவுகள்">
+        <a href="#ta-start">தொடங்குதல்</a>
+        <a href="#ta-bills">பில்களைச் சேர்த்தல்</a>
+        <a href="#ta-settle">கணக்கைத் தீர்த்தல்</a>
+        <a href="#ta-track">தம்பதிகள் &amp; குடும்பங்கள்</a>
+        <a href="#ta-spending">செலவு</a>
+        <a href="#ta-history">வரலாறு &amp; திருத்தங்கள்</a>
+        <a href="#ta-account">கணக்கு &amp; பாதுகாப்பு</a>
+        <a href="#ta-faq">கேள்விகள்</a>
+      </nav>
     </div>
-    <h2>மூன்று எளிய படிகள்</h2>
-    <ol class="steps">
-      <li><div><strong>குழுவைத் தொடங்குங்கள்</strong><span>பயணம், வீடு அல்லது அலுவலக மதிய உணவுக்கு ஒரு குழுவை உருவாக்கி, குறியீடு மூலம் நண்பர்களை அழையுங்கள்.</span></div></li>
-      <li><div><strong>செலவுகளைச் சேருங்கள்</strong><span>செலவைச் சேர்த்து யார் பகிர்கிறார்கள் என்பதைத் தேர்ந்தெடுங்கள். அனைவரின் மீதியும் தானாகவே புதுப்பிக்கப்படும்.</span></div></li>
-      <li><div><strong>கணக்கைத் தீர்த்துக்கொள்ளுங்கள்</strong><span>யார் யாருக்கு தர வேண்டும் எனப் பார்த்து, உங்களுக்கு ஏற்ற வழியில் செலுத்தி, இங்கே பதிவு செய்யுங்கள்.</span></div></li>
-    </ol>
-    <h2>அடிக்கடி கேட்கப்படும் கேள்விகள்</h2>
-    <details><summary>ஒரு பில் எப்படிப் பிரிக்கப்படுகிறது?</summary><p>யார் பகிர்கிறார்கள் என்று தேர்ந்தெடுத்து, பிறகு எப்படி என்று தேர்ந்தெடுங்கள்: சமமாக, சரியான தொகைகளாக, சதவீதமாக, அல்லது ரசீதில் உள்ள பொருட்களின்படி. செலுத்தியவருக்கு ஒவ்வொருவரும் எவ்வளவு தர வேண்டும் என்பதை Hawula கணக்கிடும்.</p></details>
-    <details><summary>கணக்கை எப்படித் தீர்ப்பது?</summary><p>குழுவைத் திறந்து கணக்கு தீர் என்பதைத் தட்டுங்கள். அனைவரையும் சமன்செய்யும் குறைந்த கட்டணங்களை Hawula காட்டும். உங்களுக்கு வசதியான வழியில் செலுத்தி (பணம், வங்கிப் பரிமாற்றம், அட்டை, ஆன்லைன் கட்டணம்…), இருப்புகள் புதுப்பிக்கப்பட செலுத்தப்பட்டது எனக் குறியுங்கள்.</p></details>
-    <details><summary>சிக்னல் இல்லாமல் பில்களைச் சேர்க்கலாமா?</summary><p>ஆம். சிக்னல் இல்லாமல் சேர்த்த பில்களும் கட்டணங்களும் உங்கள் தொலைபேசியில் வைக்கப்பட்டு, மீண்டும் இணைந்ததும் தானாக அனுப்பப்படும்.</p></details>
-    <details><summary>மீண்டும் வரும் பில்கள் எப்படிச் செயல்படுகின்றன?</summary><p>பில்லைச் சேர்க்கும்போது மீண்டும் என்பதை ஒவ்வொரு வாரம், மாதம் அல்லது ஆண்டு எனவும், விரும்பினால் முடிவு தேதியையும் அமையுங்கள். நேரம் வந்ததும் Hawula அதை மீண்டும் சேர்க்கும். குழுவின் மீண்டும் வரும் பில்களில் எப்போது வேண்டுமானாலும் நிறுத்தலாம்.</p></details>
-    <details><summary>செயலி பூட்டு என்ன செய்கிறது?</summary><p>சுயவிவரம் → பாதுகாப்பு என்பதில், Hawula திறப்பதற்கு முன் உங்கள் தொலைபேசியின் சொந்த PIN, பேட்டர்ன், கைரேகை அல்லது முகத்தைக் கேட்கலாம். Hawula அவற்றை ஒருபோதும் பார்ப்பதோ சேமிப்பதோ இல்லை.</p></details>
-    <details><summary>என் கணக்கை எப்படி நீக்குவது?</summary><p>முதலில் ஒவ்வொரு குழுவிலும் கணக்கைத் தீர்த்து, பிறகு உதவி மற்றும் ஆதரவு → என் கணக்கை நீக்கு என்பதற்குச் செல்லுங்கள். உங்கள் பழைய பில்கள் மற்றவர்களுக்கு "Deleted user" எனக் காட்டப்படும். <a href="../delete-account/">படிப்படியான வழிகாட்டி</a></p></details>
-    <h2>இன்னும் உதவி தேவையா?</h2>
-    <p class="help"><a href="mailto:hawula.app@gmail.com">hawula.app@gmail.com</a> முகவரிக்கு மின்னஞ்சல் அனுப்புங்கள்.</p>
+
+    <section class="sec" id="ta-start">
+      <h2>1. தொடங்குதல்</h2>
+      <div class="card">
+        <h3>உள்நுழைந்து குழுவைத் தொடங்குங்கள்</h3>
+        <ol class="how">
+          <li><span>Hawula-வைத் திறந்து <b>Google மூலம் உள்நுழை</b> என்பதைத் தட்டுங்கள்.</span></li>
+          <li><span><b>புதிய குழு</b> என்பதைத் தட்டுங்கள். பெயர் கொடுத்து, அது எதற்கு என்பதைத் தேர்ந்தெடுங்கள்: பயணம், வீடு, தம்பதி அல்லது மற்றவை.</span></li>
+          <li><span>குழுவின் இருப்புகள் கணக்கிடப்படும் நாணயத்தைத் தேர்ந்தெடுங்கள்.</span></li>
+          <li><span>குழு எப்படிச் செயல்படும் என்பதை முடிவு செய்யுங்கள். நண்பர்கள் அல்லது வீட்டில் உள்ளவர்களுக்கு அப்படியே விட்டால் பில்கள் பிரிக்கப்படும். செலவுகளைப் பதிவு செய்ய மட்டும் விரும்பும் தம்பதி அல்லது குடும்பத்துக்கு <b>செலவுகளை மட்டும் பதிவு செய்</b> என்பதை இயக்குங்கள் (<a href="#ta-track">தம்பதிகள் &amp; குடும்பங்கள்</a> பார்க்க).</span></li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>மற்றவர்களை அழையுங்கள்</h3>
+        <ol class="how">
+          <li><span>குழுவைத் திறந்து <b>அழை</b> என்பதைத் தட்டுங்கள்.</span></li>
+          <li><span>WhatsApp, செய்தி, மின்னஞ்சல் போன்ற எந்தச் செயலி மூலமும் அழைப்பைப் பகிருங்கள். அதில் ஓர் இணைப்பும் ஒரு குறியீடும் இருக்கும்.</span></li>
+          <li><span>உங்கள் நண்பர் இணைப்பைத் தட்டியதும் Hawula திறந்து குழுவின் பெயருடன் <b>இந்தக் குழுவில் சேர வேண்டுமா?</b> என்று கேட்கும். ஒரே தட்டலில் உள்ளே வந்துவிடுவார்கள். அவர்களிடம் Hawula இன்னும் இல்லையென்றால், இணைப்பு முதலில் Google Play-க்கு அழைத்துச் செல்லும்; நிறுவியதும் நேரடியாகக் குழுவுக்குச் செல்லும்.</span></li>
+          <li><span>இணைப்பு இல்லையா? அவர்கள் Hawula-வைத் திறந்து <b>குறியீட்டுடன் சேர்</b> என்பதைத் தட்டி குறியீட்டை உள்ளிடலாம்.</span></li>
+        </ol>
+        <p class="tip">ஓர் அழைப்பு 14 நாட்களுக்குச் செல்லுபடியாகும். அது அதிகமாகப் பரவிவிட்டால், குழுவின் மெனுவில் <b>அழைப்பு இணைப்பை மீட்டமை</b> என்பதைத் தேர்ந்தெடுங்கள். பழைய குறியீடு உடனே வேலை செய்யாது; ஏற்கனவே குழுவில் இருப்பவர்கள் அப்படியே இருப்பார்கள்.</p>
+      </div>
+    </section>
+
+    <section class="sec" id="ta-bills">
+      <h2>2. பில்களைச் சேர்த்தல்</h2>
+      <div class="card">
+        <h3>பில்லைச் சேருங்கள்</h3>
+        <ol class="how">
+          <li><span><b>செலவைச் சேர்</b> என்பதைத் தட்டி, அது எதற்கு என்பதையும் தொகையையும் உள்ளிடுங்கள். விரும்பினால் வகையையும் தேதியையும் தேர்ந்தெடுங்கள்.</span></li>
+          <li><span><b>செலுத்தியவர்</b> என்பதைத் தேர்ந்தெடுங்கள்: நீங்கள், வேறு ஒருவர், அல்லது பலர்.</span></li>
+          <li><span>யார் பகிர்கிறார்கள் என்பதைத் தேர்ந்தெடுங்கள். ஒரு பெயரைத் தட்டி சேர்க்கலாம் அல்லது விலக்கலாம்.</span></li>
+          <li><span>சேமி என்பதைத் தட்டுங்கள். அனைவரின் இருப்பும் தானாகவே புதுப்பிக்கப்படும்; மற்றவர்களுக்கு அறிவிப்பு போகும்.</span></li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>பிரிக்க நான்கு வழிகள்</h3>
+        <ul class="tips">
+          <li><b>சமமாக:</b> டிக் செய்த அனைவரும் ஒரே தொகையைச் செலுத்துவார்கள்.</li>
+          <li><b>சரியான தொகைகள்:</b> ஒவ்வொருவரும் தர வேண்டிய தொகையை உள்ளிடுங்கள். கூட்டுத்தொகை பில்லுக்குச் சமமாக இருக்க வேண்டும்.</li>
+          <li><b>சதவீதம்:</b> ஒவ்வொருவரின் பங்கையும் சதவீதமாக உள்ளிடுங்கள். கூட்டுத்தொகை 100 ஆக இருக்க வேண்டும்.</li>
+          <li><b>பங்குகள்:</b> ஒவ்வொருவருக்கும் ஒரு எண்ணை உள்ளிடுங்கள். 2 உள்ளவர் 1 உள்ளவரை விட இரு மடங்கு செலுத்துவார்.</li>
+        </ul>
+        <p class="tip">ரசீது இருக்கிறதா? <b>பொருட்களின்படி பிரி</b> என்பதைத் தேர்ந்தெடுத்து, பொருட்களை உள்ளிட்டு, ஒவ்வொன்றும் யாருக்கு என்பதைத் தட்டுங்கள். சேவைக் கட்டணம் மேலே நியாயமாகப் பகிரப்படும்.</p>
+      </div>
+      <div class="card">
+        <h3>மீண்டும் வரும் பில்கள்</h3>
+        <p>வாடகை, சந்தா போன்றவற்றுக்கு <b>மீண்டும்</b> என்பதை ஒவ்வொரு வாரம், மாதம் அல்லது ஆண்டு எனவும், விரும்பினால் முடிவு தேதியையும் அமையுங்கள். நேரம் வந்ததும் Hawula பில்லை மீண்டும் சேர்க்கும். குழுவின் <b>மீண்டும் வரும் பில்கள்</b> என்பதில் எப்போது வேண்டுமானாலும் நிறுத்தலாம்.</p>
+      </div>
+      <div class="card">
+        <h3>சிக்னல் இல்லையா?</h3>
+        <p>தொடர்ந்து சேருங்கள். சிக்னல் இல்லாமல் சேர்த்த பில்களும் கட்டணங்களும் உங்கள் தொலைபேசியில் வைக்கப்பட்டு, மீண்டும் இணைந்ததும் தானாக அனுப்பப்படும்.</p>
+      </div>
+    </section>
+
+    <section class="sec" id="ta-settle">
+      <h2>3. இருப்புகளும் கணக்குத் தீர்த்தலும்</h2>
+      <p>ஒவ்வொரு குழுவும், குழுவின் நாணயத்தில், யாருக்குப் பணம் வர வேண்டும், யார் தர வேண்டும் என்பதைக் காட்டும்.</p>
+      <div class="card">
+        <h3>கணக்கைத் தீர்ப்பது</h3>
+        <ol class="how">
+          <li><span>குழுவைத் திறந்து <b>கணக்கு தீர்</b> என்பதைத் தட்டுங்கள்.</span></li>
+          <li><span>அனைவரையும் சமன்செய்யும் குறைந்த கட்டணங்களை Hawula காட்டும்.</span></li>
+          <li><span>உங்களுக்கு வசதியான வழியில் செலுத்துங்கள்: பணம், வங்கிப் பரிமாற்றம், அட்டை, ஆன்லைன் கட்டணம். Hawula தானாகப் பணத்தை நகர்த்துவதில்லை.</span></li>
+          <li><span>கட்டணத்தைப் பெற்றவர் இருப்புகள் புதுப்பிக்கப்பட <b>செலுத்தப்பட்டது எனக் குறி</b> என்பதைத் தட்டுவார்.</span></li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>யார் யாருக்குத் தர வேண்டும் என நேரடியாகப் பார்க்க வேண்டுமா?</h3>
+        <p>குழுவின் மெனுவைத் திறந்து <b>கடன்களை எளிதாக்கு</b> என்பதை அணையுங்கள். அப்போது கணக்கு தீர் என்பது மற்றவர்கள் வழியாகச் செல்லும் குறுக்குவழி இல்லாமல், யார் யாருக்குத் தர வேண்டும் என்பதை அப்படியே காட்டும்.</p>
+      </div>
+    </section>
+
+    <section class="sec" id="ta-track">
+      <h2>4. தம்பதிகள் & குடும்பங்கள்: செலவுகளை மட்டும் பதிவு செய்யுங்கள்</h2>
+      <p>சில குழுக்கள் எதையும் பிரிப்பதில்லை. வீட்டைப் பகிரும் தம்பதி, ஒரு குடும்பம். அவர்கள் பணம் எங்கே போகிறது என்பதைப் பார்க்க மட்டுமே விரும்புவார்கள். அதற்கு Hawula-வில் ஒரு முறை உண்டு.</p>
+      <div class="card">
+        <h3>எப்படிச் செயல்படுகிறது</h3>
+        <ul class="tips">
+          <li>பில்கள் <b>பதிவு மட்டுமே</b>. யாரும் யாருக்கும் கடன்பட மாட்டார்கள், கணக்குத் தீர்ப்பும் இல்லை.</li>
+          <li>பில்லைச் சேர்ப்பது விரைவு: தொகை, எதற்கு, யார் செலுத்தினார் என்பது மட்டும்.</li>
+          <li>குழுவில் உள்ள அனைவருக்கும் <b>ஒவ்வொரு புதிய பில்லுக்கும்</b> அறிவிப்பு வரும்; இருவருக்கும் எப்போதும் தெரியும்.</li>
+          <li>குழுவின் பக்கம் இருப்புகளுக்குப் பதிலாக <b>இந்த மாதச் செலவு</b> என்பதைக் காட்டும்.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>இயக்குவது அல்லது நிறுத்துவது</h3>
+        <ol class="how">
+          <li><span>குழுவைத் தொடங்கும்போது <b>செலவுகளை மட்டும் பதிவு செய்</b> என்பதை இயக்குங்கள். தம்பதி என்பதைத் தேர்ந்தெடுத்தால் அது முதலிலேயே இயக்கத்தில் இருக்கும்.</span></li>
+          <li><span>பிறகு, குழுவின் <b>உரிமையாளர்</b> குழுவின் மெனுவிலிருந்து இதை மாற்றலாம். நிறுத்தினால், அப்போதிலிருந்து பில்கள் மீண்டும் பிரிக்கப்படும்.</span></li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>அறிவிப்புகள் அதிகமா?</h3>
+        <p>குழுவின் மெனுவைத் திறந்து <b>ஒவ்வொரு செலவையும் எனக்கு அறிவி</b> என்பதை அணையுங்கள். இது உங்களுக்கு மட்டுமே பொருந்தும். மற்றவர்களுக்கு அறிவிப்புகள் தொடர்ந்து வரும்.</p>
+      </div>
+    </section>
+
+    <section class="sec" id="ta-spending">
+      <h2>5. செலவு: பணம் எங்கே போகிறது?</h2>
+      <p>எந்தக் குழுவையும் திறந்து <b>செலவு</b> என்பதைத் தட்டுங்கள். குழு பில்களைப் பிரித்தாலும் பதிவு மட்டும் செய்தாலும் இது ஒரே மாதிரி செயல்படும்.</p>
+      <div class="card">
+        <h3>மேலோட்டம்</h3>
+        <ul class="tips">
+          <li><b>இந்த மாதம்</b> கடந்த மாதத்துடன், எவ்வளவு கூடியது அல்லது குறைந்தது என்பதுடன்.</li>
+          <li>கடந்த ஆறு மாதங்களின் வரைபடம். புதிய குழு அதன் முதல் மாதத்திலிருந்து தொடங்கும்; வெற்றுக் கடந்த காலம் இருக்காது.</li>
+          <li><b>யார் செலுத்தினார்:</b> செலுத்தியதில் ஒவ்வொருவரின் பங்கையும் காட்டும் ஒரே பட்டை.</li>
+          <li><b>வகைவாரியாக:</b> உணவு, வாடகை, போக்குவரத்து எனப் பெரியதிலிருந்து.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>ஆழமாகப் பாருங்கள்</h3>
+        <ol class="how">
+          <li><span>வரைபடத்தில் ஒரு மாதத்தைத் தட்டி, மீண்டும் தட்டுங்கள் (அல்லது <b>பில்களைப் பார்</b> என்பதைத் தட்டுங்கள்); அந்த மாதம் திறக்கும்.</span></li>
+          <li><span>அந்த மாதத்தின் அனைத்து பில்களும் வகைவாரியாகத் தெரியும். ஒரு வகையைத் தட்டி அதன் பில்களைத் திறக்கலாம்; ஒரு பில்லைத் தட்டி முழுமையாகப் பார்க்கலாம்.</span></li>
+          <li><span>மேலோட்டத்தில் ஒரு வகையைத் தட்டினால் <b>வரலாற்றில்</b> அந்த பில்கள் மட்டும் தெரியும்.</span></li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>அனைவரின் செலவு அல்லது உங்களுடையது மட்டும்</h3>
+        <p>ஒவ்வொரு பில்லிலும் உங்கள் பங்கை மட்டும் கணக்கிட <b>என் பங்கு</b> என்பதற்கு மாறுங்கள். முழுக் குழுவையும் பார்க்க மீண்டும் மாறுங்கள்.</p>
+      </div>
+    </section>
+
+    <section class="sec" id="ta-history">
+      <h2>6. வரலாறும் திருத்தங்களும்</h2>
+      <div class="card">
+        <h3>ஒரு பில்லைக் கண்டுபிடியுங்கள்</h3>
+        <ol class="how">
+          <li><span>குழுவின் <b>வரலாற்றைத்</b> திறங்கள்.</span></li>
+          <li><span><b>அனைத்தும்</b>, <b>பில்கள்</b> அல்லது <b>கட்டணங்கள்</b> என வடிகட்டுங்கள், அல்லது பெயரால் தேடுங்கள்.</span></li>
+          <li><span>ஒன்றைத் தட்டி யார் செலுத்தினார், யார் பகிர்ந்தார், எப்போது என்பதைப் பாருங்கள்.</span></li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>தவறைச் சரிசெய்யுங்கள்</h3>
+        <p>பில்லைத் திறந்து <b>செலவைத் திருத்து</b> என்பதைத் தேர்ந்தெடுத்து தொகை, பிரிப்பு, வகை அல்லது வேறு எதையும் மாற்றுங்கள். அதை நீக்கவும் முடியும்: அது அனைவரின் இருப்புகளிலிருந்தும் நீங்கும்; அது நீக்கப்பட்டது என்பதை குழு <b>செயல்பாடு</b> பகுதியில் காணும்.</p>
+      </div>
+      <div class="card">
+        <h3>செயல்பாடு</h3>
+        <p>செயல்பாடு தாவல் உங்கள் எல்லாக் குழுக்களிலும் நடப்பதைக் காட்டும்: புதிய பில்கள், கட்டணங்கள், சேர்பவர்கள்.</p>
+      </div>
+      <div class="card">
+        <h3>குழுவிலிருந்து விலகுதல், அல்லது ஒருவரை நீக்குதல்</h3>
+        <p>உங்கள் இருப்பு பூஜ்ஜியமானதும் குழுவிலிருந்து விலகலாம்; எனவே முதலில் கணக்கைத் தீர்த்துக்கொள்ளுங்கள். குழுவின் வரலாறு மற்றவர்களுக்கு அப்படியே இருக்கும், பழைய பில்களில் உங்கள் பெயர் இருக்கும், பிறகு அழைப்பு மூலம் மீண்டும் சேரலாம். உரிமையாளர் குழுவின் உறுப்பினர் பட்டியலிலிருந்து ஒருவரை நீக்கலாம். அவர்களின் பழைய பில்கள் இருக்கும்.</p>
+      </div>
+    </section>
+
+    <section class="sec" id="ta-account">
+      <h2>7. உங்கள் கணக்கும் பாதுகாப்பும்</h2>
+      <div class="card">
+        <h3>அறிவிப்புகள்</h3>
+        <p><b>சுயவிவரம்</b> என்பதில், ஒருவர் உங்களுடன் பில்லைச் சேர்க்கும்போதோ உங்களுக்குத் திருப்பிச் செலுத்தும்போதோ தெரிந்துகொள்ள அறிவிப்புகளை இயக்குங்கள். உங்கள் தொலைபேசி அமைப்புகளில் அவை தடுக்கப்பட்டிருந்தால் Hawula சொல்லும்.</p>
+      </div>
+      <div class="card">
+        <h3>செயலி பூட்டு</h3>
+        <p><b>சுயவிவரம் → பாதுகாப்பு</b> என்பதில், Hawula திறப்பதற்கு முன் உங்கள் தொலைபேசியின் சொந்த PIN, பேட்டர்ன், கைரேகை அல்லது முகத்தைக் கேட்கலாம். Hawula அவற்றை ஒருபோதும் பார்ப்பதோ சேமிப்பதோ இல்லை.</p>
+      </div>
+      <div class="card">
+        <h3>மொழி</h3>
+        <p>Hawula ஆங்கிலம், சிங்களம், தமிழ் மொழிகளில் உள்ளது. <b>சுயவிவரம் → மொழி</b> என்பதில் மாற்றலாம், அல்லது உங்கள் தொலைபேசியின் மொழியிலேயே விடலாம்.</p>
+      </div>
+      <div class="card">
+        <h3>கணக்கை நீக்குதல்</h3>
+        <p>முதலில் ஒவ்வொரு குழுவிலும் கணக்கைத் தீர்த்து, பிறகு <b>உதவி மற்றும் ஆதரவு → என் கணக்கை நீக்கு</b> என்பதற்குச் செல்லுங்கள். உங்கள் பழைய பில்கள் மற்றவர்களுக்கு "Deleted user" எனக் காட்டப்படும். <a href="../delete-account/">படிப்படியான வழிகாட்டி</a></p>
+      </div>
+    </section>
+
+    <section class="sec" id="ta-faq">
+      <h2>8. அடிக்கடி கேட்கப்படும் கேள்விகள்</h2>
+      <details><summary>ஒரு பில் எப்படிப் பிரிக்கப்படுகிறது?</summary><p>யார் பகிர்கிறார்கள் என்று தேர்ந்தெடுத்து, பிறகு எப்படி என்று தேர்ந்தெடுங்கள்: சமமாக, சரியான தொகைகளாக, சதவீதமாக, பங்குகளாக, அல்லது ரசீதில் உள்ள பொருட்களின்படி. செலுத்தியவருக்கு ஒவ்வொருவரும் எவ்வளவு தர வேண்டும் என்பதை Hawula கணக்கிடும்.</p></details>
+      <details><summary>கணக்கை எப்படித் தீர்ப்பது?</summary><p>குழுவைத் திறந்து கணக்கு தீர் என்பதைத் தட்டுங்கள். அனைவரையும் சமன்செய்யும் குறைந்த கட்டணங்களை Hawula காட்டும். உங்களுக்கு வசதியான வழியில் செலுத்தி, இருப்புகள் புதுப்பிக்கப்பட செலுத்தப்பட்டது எனக் குறியுங்கள்.</p></details>
+      <details><summary>சிக்னல் இல்லாமல் பில்களைச் சேர்க்கலாமா?</summary><p>ஆம். சிக்னல் இல்லாமல் சேர்த்த பில்களும் கட்டணங்களும் உங்கள் தொலைபேசியில் வைக்கப்பட்டு, மீண்டும் இணைந்ததும் தானாக அனுப்பப்படும்.</p></details>
+      <details><summary>அழைப்பு இணைப்பு குழுவைத் திறக்கவில்லை. இப்போது என்ன செய்வது?</summary><p>அதற்குப் பதிலாக குறியீட்டைக் கேளுங்கள்: Hawula-வைத் திறந்து குறியீட்டுடன் சேர் என்பதைத் தட்டி உள்ளிடுங்கள். குறியீடு வேலை செய்யவில்லை என்றால், அது 14 நாட்களுக்கு மேல் பழையதாகவோ மீட்டமைக்கப்பட்டதாகவோ இருக்கலாம்; புதிய அழைப்பைக் கேளுங்கள்.</p></details>
+      <details><summary>ஒரு குழு பிரிப்பதற்கும் பதிவு செய்வதற்கும் இடையே மாற முடியுமா?</summary><p>ஆம், உரிமையாளர் எப்போது வேண்டுமானாலும் குழுவின் மெனுவிலிருந்து மாற்றலாம். மாற்றத்துக்கு முன் சேர்த்த பில்கள் பதிவான விதத்திலேயே இருக்கும்.</p></details>
+      <details><summary>செயலி பூட்டு என்ன செய்கிறது?</summary><p>சுயவிவரம் → பாதுகாப்பு என்பதில், Hawula திறப்பதற்கு முன் உங்கள் தொலைபேசியின் சொந்த PIN, பேட்டர்ன், கைரேகை அல்லது முகத்தைக் கேட்கலாம். Hawula அவற்றை ஒருபோதும் பார்ப்பதோ சேமிப்பதோ இல்லை.</p></details>
+      <h2 style="margin-top:32px">இன்னும் உதவி தேவையா?</h2>
+      <p class="help"><a href="mailto:hawula.app@gmail.com">hawula.app@gmail.com</a> முகவரிக்கு மின்னஞ்சல் அனுப்புங்கள். செயலியில் <b>உதவி மற்றும் ஆதரவு → சிக்கலைப் புகாரளி</b> உங்கள் செயலிப் பதிப்பை எங்களுக்காக நிரப்பும்.</p>
+    </section>
   </div>
 
 </main>
